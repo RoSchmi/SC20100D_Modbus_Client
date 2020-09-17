@@ -5,7 +5,9 @@ using GHIElectronics.TinyCLR.Devices.Modbus;
 using GHIElectronics.TinyCLR.Devices.Modbus.Interface;
 
 // implement slave device
+//public class MyModbusDevice : ModbusDevice, IModbusInterface
 public class MyModbusDevice : ModbusDevice
+
 {
     static ushort ctr = 0;
     public MyModbusDevice(byte deviceAddress, object syncObject = null)
@@ -42,24 +44,21 @@ public class MyModbusDevice : ModbusDevice
     {
         return ModbusConformityLevel.Regular;
     }
-
-
-     
+ 
     protected override ModbusErrorCode OnReadHoldingRegisters(bool isBroadcast, ushort startAddress, ushort[] registers)
     {       
         
         for (int n = 0; n < registers.Length; ++n)
         {
             // just set a number in each register to test
-            registers[n] = ctr;
-            
+            registers[n] = ctr;       
         }
         ctr++;
 
            //Debug.WriteLine("Read Response Fired");
        
         return ModbusErrorCode.NoError;
-            
+       
     }
 
     // override any On<ModusFunction> methods here

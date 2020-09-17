@@ -18,12 +18,10 @@ namespace SC20100D_Modbus_Client
 
         bool link_required = true;
         bool isRunning = false;
-
         public ModbusTcpSlave(byte address)
         {
             this.address = address;
         }
-
         public void Start()
         {
             if (!isRunning)
@@ -33,7 +31,6 @@ namespace SC20100D_Modbus_Client
                 Ethernet_Thread.Start();
             }
         }
-
         public void Stop()
         {
             if (link_required)
@@ -41,10 +38,10 @@ namespace SC20100D_Modbus_Client
                 link_required = false;
             }
         }
-
         private void runThread()
         {
             ModbusTCP_Device = new MyModbusDevice(address);
+            
             mbListener = new ModbusTcpListener(ModbusTCP_Device, 502, 5, 1000);
             Thread.Sleep(100);
 
@@ -53,11 +50,9 @@ namespace SC20100D_Modbus_Client
 
             while (link_required == true)
             {
-
                 if (ModbusTCP_Device.IsRunning == true)
                 {
-                    //System.Diagnostics.Debug.WriteLine("Running   ");
-
+                    //System.Diagnostics.Debug.WriteLine("Running   ");                 
                 }
                 else
                 {
@@ -68,6 +63,5 @@ namespace SC20100D_Modbus_Client
             }
             isRunning = false;
         }
-
     }
 }

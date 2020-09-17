@@ -67,7 +67,7 @@ namespace GHIElectronics.TinyCLR.Devices.Modbus
                 if (this.Buffer1 == null || intf.MaxTelegramLength > this.Buffer1.Length)
                 {
                     this.Buffer1 = new byte[intf.MaxTelegramLength];
-                }
+                }            
                 intf.PrepareRead();
                 this.interfaces.Add(intf);
             }
@@ -166,12 +166,12 @@ namespace GHIElectronics.TinyCLR.Devices.Modbus
                             }
                             // RoSchmi
                             // there seemed to be a bug in the original library code
+                            // in 'ModbusTcpInterface.cs" 
                             // https://forums.ghielectronics.com/t/modbustcp-device/23249
 
-                            //if (!intf.IsConnectionOk)                         
-                            if (intf.IsConnectionOk)
-                            {
-                                // Debug.WriteLine("Is o.K. Number of connections is: " + this.interfaces.Count);
+                                                 
+                            if (!intf.IsConnectionOk)
+                            {  
                                 this.interfaces.RemoveAt(n);
                                 if (intf is IDisposable disp)
                                 {
